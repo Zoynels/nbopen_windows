@@ -6,14 +6,13 @@ in that directory.
 
 Installation::
 
-    python3 -m pip install nbopen_windows
+    python -m pip install nbopen_windows
 
 Usage::
 
-    nbopen AwesomeNotebook.ipynb
+    nbopen_windows AwesomeNotebook.ipynb
 
-To integrate with your file manager, so you can double click on notebooks
-to open them, run:
+If double click on notebooks not work, then, run:
 
-* Windows: ``python3 -m nbopen.install_win``
+* Windows: ``python -m nbopen_windows.install_win``
 
