@@ -11,7 +11,7 @@ from traitlets.config import Config
 
 def find_best_server(filename):
     servers = [si for si in notebookapp.list_running_servers()
-               if filename.startswith(si['notebook_dir'])]
+               if filename.lower().startswith(si['notebook_dir'].lower())]
     try:
         return max(servers, key=lambda si: len(si['notebook_dir']))
     except ValueError:
