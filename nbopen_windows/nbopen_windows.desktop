@@ -4,6 +4,6 @@ Version=1.0
 Name=Jupyter Notebook
 # This is for opening files, not launching the notebook from a menu
 NoDisplay=true
-Exec={PYTHON} -m nbopen %f
+Exec={PYTHON} -m nbopen_windows %f
 Terminal=false
 MimeType=application/x-ipynb+json;

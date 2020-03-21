@@ -33,7 +33,7 @@ def nbopen(filename):
         browser = webbrowser.get(na.browser or None)
         browser.open(url, new=2)
     else:
-        if filename.startswith(home_dir):
+        if filename.lower().startswith(home_dir):
             nbdir = home_dir
         else:
             nbdir = os.path.dirname(filename)
@@ -52,7 +52,7 @@ def nbopen(filename):
                                         )
 
 def nbnew(filename):
-    if not filename.endswith('.ipynb'):
+    if not filename.lower().endswith('.ipynb'):
         filename += '.ipynb'
     if os.path.exists(filename):
         msg = "Notebook {} already exists"

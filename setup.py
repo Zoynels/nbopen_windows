@@ -2,7 +2,7 @@
 import sys
 from setuptools import setup  # Noooooo
 
-import nbopen
+import nbopen_windows
 
 
 def load_requirements(fname):
@@ -13,19 +13,34 @@ def load_requirements(fname):
         # for pip <= 9.0.3
         from pip.req import parse_requirements
 
-    reqs = parse_requirements(fname, session="nbopen")
+    reqs = parse_requirements(fname, session="nbopen_windows")
     return [str(ir.req) for ir in reqs]
 
-setup(name='nbopen',
-      version=nbopen.__version__,
-      description="Open a notebook from the command line in the best available server",
-      author='Thomas Kluyver',
-      author_email="thomas@kluyver.me.uk",
-      url="https://github.com/takluyver/nbopen",
-      install_requires=load_requirements("requirements.txt"), 
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+setup(name='nbopen_windows',
+    version=nbopen_windows.__version__,
+    author='Zoynels',
+    author_email="zoynels@gmail.com",
+    url="https://github.com/zoynels/nbopen",
+    packages=['nbopen_windows'],
+    description="Opens ipynb files on click. Reuses existing jupyter instance if possible. Work only in Windows.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: Windows",
+    ],
+    license="MIT License",
+    zip_safe=False,
+    keywords=['jupyter', 'notebook', 'ipynb'],
+    install_requires=load_requirements("requirements.txt"), 
 )
 
-if sys.platform == "win32":
-    import nbopen.install_win
-elif (sys.platform == "linux") or (sys.platform == "linux2"):
-    import nbopen.install_xdg
+if sys.platform == 'win32':
+    print('Writing to registry...', end='')
+    import nbopen_windows.install_win
+    print('done')
