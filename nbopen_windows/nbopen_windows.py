@@ -1,28 +1,33 @@
 #!/usr/bin/python3
 
 import argparse
-import os.path
+import os
 import webbrowser
 
 from notebook import notebookapp
 from notebook.utils import url_path_join, url_escape
 import nbformat
 from traitlets.config import Config
+from .util import list_running_servers_v2, is_downloadebal_url, read_opt_timout
+
 
 def find_best_server(filename):
-    servers = [si for si in notebookapp.list_running_servers()
-               if filename.lower().startswith(si['notebook_dir'].lower())]
+    servers = []
+    list_running_servers_v2() # TODO: After change in standart function -- delete this function
+    for si in notebookapp.list_running_servers():
+        if filename.lower().startswith(si['notebook_dir'].lower()):
+            servers.append(si)
     try:
         return max(servers, key=lambda si: len(si['notebook_dir']))
     except ValueError:
         return None
 
-
 def nbopen(filename):
     filename = os.path.abspath(filename)
     home_dir = os.path.expanduser('~')
     server_inf = find_best_server(filename)
-    if server_inf is not None:
+    if (server_inf is not None) and \
+        (is_downloadebal_url(server_inf["url"], timeout=read_opt_timout())):
         print("Using existing server at", server_inf['notebook_dir'])
         path = os.path.relpath(filename, start=server_inf['notebook_dir'])
         if os.sep != '/':
