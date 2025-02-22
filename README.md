@@ -7,6 +7,8 @@ in that directory.
 Installation::
 
     python -m pip install nbopen_windows
+    python -m pip install -e c:\path\to\package\ZS-Content-Checker\
+    python -m pip install -e h:\github.com\Zoynels\nbopen_windows\
 
 Usage::
 

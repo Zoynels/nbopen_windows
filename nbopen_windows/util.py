@@ -5,7 +5,7 @@ import json
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from notebook.utils import check_pid
+from jupyter_server.utils import check_pid
 from jupyter_core.paths import jupyter_runtime_dir, jupyter_path
 
 try:
